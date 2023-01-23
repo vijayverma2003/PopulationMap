@@ -9,6 +9,7 @@ import TileLayer from "ol/layer/Tile.js";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import View from "ol/View.js";
+import { createOSMId } from "../services/location";
 
 function MapCanvas({ result }: { result: LookupResult | null }) {
   useEffect(() => {
@@ -39,9 +40,9 @@ function MapCanvas({ result }: { result: LookupResult | null }) {
         target: "map",
       });
 
-      const url = `${process.env.REACT_APP_API_URL}lookup?osm_ids=${
-        result.osm_type[0].toUpperCase() + result.osm_id
-      }&format=geojson&polygon_geojson=1`;
+      const url = `${process.env.REACT_APP_API_URL}lookup?osm_ids=${createOSMId(
+        result
+      )}&format=geojson&polygon_geojson=1`;
 
       const baseVector = new VectorLayer({
         source: new VectorSource({
@@ -58,9 +59,24 @@ function MapCanvas({ result }: { result: LookupResult | null }) {
       map.addLayer(baseVector);
     }
   }, [result]);
+
+  const handleAddToFavourites = () => {
+    let favourites = JSON.parse(localStorage.getItem("favourites") as string);
+    const favourite = { [createOSMId(result!)]: result!.display_name };
+    if (!favourites)
+      localStorage.setItem("favourites", JSON.stringify(favourite));
+    else {
+      favourites = { favourite, ...favourites };
+      localStorage.setItem("favourites", JSON.stringify(favourites));
+    }
+  };
+
   return (
     <div id="map" className="map-container">
-      <button className="icon-box add-to-favourite-icon">
+      <button
+        onClick={handleAddToFavourites}
+        className="icon-box add-to-favourite-icon"
+      >
         <svg
           width="26"
           height="26"

@@ -2,21 +2,18 @@ import React, { useEffect, useState } from "react";
 
 interface SearchDetailsProps {
   inputDetailsRef: React.RefObject<HTMLDivElement>;
+  onSubmit: (e: React.FormEvent, q: string) => void;
 }
 
-interface SearchHistory {
-  [osm_id: string]: string;
-}
-
-function SearchDetails({ inputDetailsRef }: SearchDetailsProps) {
-  const [history, setHistory] = useState<SearchHistory>({});
+function SearchDetails({ inputDetailsRef, onSubmit }: SearchDetailsProps) {
+  const [history, setHistory] = useState<string[]>([]);
 
   useEffect(() => {
     let historyString = localStorage.getItem("history");
     if (historyString && typeof historyString === "string") {
       let history = JSON.parse(historyString);
       setHistory(history);
-    } else localStorage.setItem("history", "{}");
+    }
   }, []);
 
   const handleClick = (key: string) => {
@@ -29,16 +26,16 @@ function SearchDetails({ inputDetailsRef }: SearchDetailsProps) {
         <div className="search-result">
           <h4>Search History</h4>
           <ul className="search-result-list">
-            {Object.keys(history).map((key, index) => {
+            {history.map((query, index) => {
               return (
                 index < 5 && (
                   <li key={index} className="search-result-list-item">
                     <button
                       className="search-result-button"
                       type="button"
-                      onClick={() => handleClick(key)}
+                      onClick={(e) => onSubmit(e, query)}
                     >
-                      {history[key]}
+                      {query}
                     </button>
                   </li>
                 )

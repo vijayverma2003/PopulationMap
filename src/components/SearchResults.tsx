@@ -18,15 +18,6 @@ function SearchResults({ searchResults, visible }: SearchResultsProps) {
       osm_id,
     });
 
-    if (!localStorage.getItem("history")) {
-      const history = { [osm_id]: result.display_name };
-      localStorage.setItem("history", JSON.stringify(history));
-    } else {
-      let history = JSON.parse(localStorage.getItem("history") as string);
-      history = { [osm_id]: result.display_name, ...history };
-      localStorage.setItem("history", JSON.stringify(history));
-    }
-
     window.location.search = q;
   };
 

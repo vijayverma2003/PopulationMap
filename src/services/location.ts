@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SearchResult } from "../models/nominatim";
+import { LookupResult, SearchResult } from "../models/nominatim";
 
 const searchResultsLimit = 10;
 
@@ -18,7 +18,11 @@ export async function getSearchResults(query: string, format = "json") {
 
 export async function getLocationData(osm_ids: string) {
   const response = await http.get(
-    `lookup?osm_ids=${osm_ids}&format=json&extratags=1&polygon_geojson=1`
+    `lookup?osm_ids=${osm_ids}&format=json&extratags=1`
   );
   return response.data;
+}
+
+export function createOSMId(data: LookupResult) {
+  return data.osm_type[0].toUpperCase() + data.osm_id;
 }

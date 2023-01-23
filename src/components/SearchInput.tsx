@@ -31,6 +31,15 @@ function SearchInput() {
   const handleSubmit = (e: React.FormEvent, q = query) => {
     e.preventDefault();
 
+    if (!localStorage.getItem("history")) {
+      const history = [q];
+      localStorage.setItem("history", JSON.stringify(history));
+    } else {
+      let history = JSON.parse(localStorage.getItem("history") as string);
+      if (!history.includes(q)) history = [q, ...history];
+      localStorage.setItem("history", JSON.stringify(history));
+    }
+
     setTimeout(async () => {
       let results = await getSearchResults(q.toLowerCase());
       setSearchResults(results);
@@ -55,7 +64,10 @@ function SearchInput() {
           </div>
         </div>
       </form>
-      <SearchDetails inputDetailsRef={inputDetailsRef} />
+      <SearchDetails
+        onSubmit={handleSubmit}
+        inputDetailsRef={inputDetailsRef}
+      />
       <SearchResults
         searchResults={searchResults as SearchResult[]}
         visible={modalVisible}

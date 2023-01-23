@@ -1,11 +1,41 @@
+import queryString from "query-string";
+import { useEffect, useState } from "react";
+
+interface Favourite {
+  [osm_id: string]: string;
+}
+
 function Sidebar() {
+  const [favourites, setFavourites] = useState<Favourite>({});
+
+  useEffect(() => {
+    const favourites = JSON.parse(localStorage.getItem("favourites") as string);
+    setFavourites(favourites);
+  }, []);
+
+  const handleFavouriteDescriptionClick = (osm_id: string) => {
+    window.location.search = queryString.stringify({
+      osm_id,
+      q: favourites[osm_id],
+    });
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <h2>Favourites</h2>
       </div>
       <div className="favourite">
-        <p className="favourite-description">Boston, Massachusetts, USA</p>
+        {Object.keys(favourites).map((key) => (
+          <button
+            key={key}
+            onClick={() => handleFavouriteDescriptionClick(key)}
+            className="favourite-description"
+          >
+            {favourites[key]}
+          </button>
+        ))}
+
         <button>
           <svg
             width="21"
