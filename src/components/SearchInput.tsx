@@ -3,17 +3,18 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { getSearchResults } from "../services/location";
 import { SearchResult } from "../models/nominatim";
+import { storeHistory } from "../services/utils";
 import SearchDetails from "./SearchDetails";
 import SearchResults from "./SearchResults";
 
 import searchIcon from "../images/search.svg";
 
-function SearchInput() {
+function SearchInput(): JSX.Element {
   const inputDetailsRef = useRef<HTMLDivElement>(null);
 
+  const [modalVisible, setModelVisible] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>();
-  const [modalVisible, setModelVisible] = useState(false);
 
   useEffect(() => {
     const { q, shared } = queryString.parse(window.location.search);
@@ -31,14 +32,7 @@ function SearchInput() {
   const handleSubmit = (e: React.FormEvent, q = query) => {
     e.preventDefault();
 
-    if (!localStorage.getItem("history")) {
-      const history = [q];
-      localStorage.setItem("history", JSON.stringify(history));
-    } else {
-      let history = JSON.parse(localStorage.getItem("history") as string);
-      if (!history.includes(q)) history = [q, ...history];
-      localStorage.setItem("history", JSON.stringify(history));
-    }
+    storeHistory(q);
 
     setTimeout(async () => {
       let results = await getSearchResults(q.toLowerCase());
@@ -64,10 +58,12 @@ function SearchInput() {
           </div>
         </div>
       </form>
+
       <SearchDetails
         onSubmit={handleSubmit}
         inputDetailsRef={inputDetailsRef}
       />
+
       <SearchResults
         searchResults={searchResults as SearchResult[]}
         visible={modalVisible}

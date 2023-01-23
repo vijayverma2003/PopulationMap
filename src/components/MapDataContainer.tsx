@@ -1,10 +1,11 @@
 import { getLocationData } from "../services/location";
 import { LookupResult } from "../models/nominatim";
 import { useEffect, useState } from "react";
-import copySVG from "../images/copy.svg";
 import MapCanvas from "./MapCanvas";
-import markerSVG from "../images/marker.svg";
 import queryString from "query-string";
+
+import copySVG from "../images/copy.svg";
+import markerSVG from "../images/marker.svg";
 
 function MapDataContainer() {
   const [currentLocation, setCurrentLocation] = useState<LookupResult | null>(
@@ -34,10 +35,13 @@ function MapDataContainer() {
 
   return (
     <div className="map-data">
-      {currentLocation && <MapCanvas result={currentLocation} />}
+      <div className="map-container">
+        {currentLocation && <MapCanvas result={currentLocation} />}
+      </div>
       <header className="map-data-header">
         <div className="map-location">
           <img src={markerSVG} alt="Marker" />
+
           <h2>{currentLocation?.display_name}</h2>
         </div>
 

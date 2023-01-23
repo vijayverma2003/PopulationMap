@@ -22,7 +22,6 @@ function SearchResults({ searchResults, visible }: SearchResultsProps) {
   };
 
   const handleBlur = () => {
-    console.log("hello");
     const modal = document.querySelector("dialog");
     modal?.close();
   };

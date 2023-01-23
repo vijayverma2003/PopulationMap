@@ -218,6 +218,10 @@ input {
   margin-top: 0.4rem;
 }
 
+.search-result-list-item {
+  transition: background-color 0.3s ease-out;
+}
+
 .search-result-list-item:hover {
   background-color: rgb(240, 240, 240);
 }
@@ -228,6 +232,14 @@ input {
   text-align: left;
   padding-top: 1rem;
   padding-bottom: 1.2rem;
+  padding-left: 1rem;
+}
+
+.btn-clean {
+  width: 100%;
+  background-color: #cccccc;
+  padding: 1.4rem 0;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 600px) {
@@ -249,11 +261,12 @@ input {
   position: relative;
   width: 100%;
   height: 500px;
+  background-color: #e5e5e5;
 }
 
-.map-image {
+#map {
   width: 100%;
-  min-height: 500px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -335,6 +348,9 @@ input {
   overflow: hidden;
   z-index: 1;
   transition: right 0.2s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .sidebar-header {

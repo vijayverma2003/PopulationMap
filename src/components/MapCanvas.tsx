@@ -1,3 +1,4 @@
+import { createOSMId } from "../services/location";
 import { LookupResult } from "../models/nominatim";
 import { useEffect } from "react";
 
@@ -9,7 +10,6 @@ import TileLayer from "ol/layer/Tile.js";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import View from "ol/View.js";
-import { createOSMId } from "../services/location";
 
 function MapCanvas({ result }: { result: LookupResult | null }) {
   useEffect(() => {
@@ -21,9 +21,8 @@ function MapCanvas({ result }: { result: LookupResult | null }) {
         result.extratags.place === "city"
       )
         zoom = 10;
-
-      if (result.extratags.linked_place === "state") zoom = 5;
-      if (result.extratags.border_type?.startsWith("nation")) zoom = 2;
+      else if (result.extratags.linked_place === "state") zoom = 5;
+      else if (result.extratags.border_type?.startsWith("nation")) zoom = 2;
 
       const view = new View({
         center: fromLonLat([parseFloat(result.lon), parseFloat(result.lat)]),
@@ -66,13 +65,13 @@ function MapCanvas({ result }: { result: LookupResult | null }) {
     if (!favourites)
       localStorage.setItem("favourites", JSON.stringify(favourite));
     else {
-      favourites = { favourite, ...favourites };
+      favourites = { ...favourite, ...favourites };
       localStorage.setItem("favourites", JSON.stringify(favourites));
     }
   };
 
   return (
-    <div id="map" className="map-container">
+    <div id="map">
       <button
         onClick={handleAddToFavourites}
         className="icon-box add-to-favourite-icon"
