@@ -13,7 +13,7 @@ import { createOSMId } from "../services/location";
 
 function MapCanvas({ result }: { result: LookupResult | null }) {
   useEffect(() => {
-    if (result) {
+    if (result?.extratags) {
       let zoom = 6;
 
       if (

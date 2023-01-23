@@ -1,10 +1,10 @@
 import { getLocationData } from "../services/location";
 import { LookupResult } from "../models/nominatim";
-import queryString from "query-string";
 import { useEffect, useState } from "react";
+import copySVG from "../images/copy.svg";
 import MapCanvas from "./MapCanvas";
 import markerSVG from "../images/marker.svg";
-import copySVG from "../images/copy.svg";
+import queryString from "query-string";
 
 function MapDataContainer() {
   const [currentLocation, setCurrentLocation] = useState<LookupResult | null>(
@@ -46,18 +46,21 @@ function MapDataContainer() {
         </button>
       </header>
 
-      <div className="location-data">
-        <div>
-          <h4 className="text-primary">Population</h4>
-          <p>{currentLocation?.extratags["population"] ?? "Not available"}</p>
+      {currentLocation?.extratags && (
+        <div className="location-data">
+          <div>
+            <h4 className="text-primary">Population</h4>
+            <p>{currentLocation?.extratags["population"] ?? "Not available"}</p>
+          </div>
+          <div>
+            <h4 className="text-primary">Census</h4>
+            <p>
+              {currentLocation?.extratags["census:population"] ??
+                "Not available"}
+            </p>
+          </div>
         </div>
-        <div>
-          <h4 className="text-primary">Census</h4>
-          <p>
-            {currentLocation?.extratags["census:population"] ?? "Not available"}
-          </p>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
