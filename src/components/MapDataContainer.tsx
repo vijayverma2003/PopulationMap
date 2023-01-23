@@ -49,12 +49,12 @@ function MapDataContainer() {
       <div className="location-data">
         <div>
           <h4 className="text-primary">Population</h4>
-          <p>{currentLocation?.extratags["population"] || "Not available"}</p>
+          <p>{currentLocation?.extratags["population"] ?? "Not available"}</p>
         </div>
         <div>
           <h4 className="text-primary">Census</h4>
           <p>
-            {currentLocation?.extratags["census:population"] || "Not available"}
+            {currentLocation?.extratags["census:population"] ?? "Not available"}
           </p>
         </div>
       </div>

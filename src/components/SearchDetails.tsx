@@ -16,10 +16,6 @@ function SearchDetails({ inputDetailsRef, onSubmit }: SearchDetailsProps) {
     }
   }, []);
 
-  const handleClick = (key: string) => {
-    window.location.search = `osm_id=${key}`;
-  };
-
   return (
     <div ref={inputDetailsRef} className="input-details">
       <div className="input-details-content">
