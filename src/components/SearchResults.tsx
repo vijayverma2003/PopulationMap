@@ -30,8 +30,14 @@ function SearchResults({ searchResults, visible }: SearchResultsProps) {
     window.location.search = q;
   };
 
+  const handleBlur = () => {
+    console.log("hello");
+    const modal = document.querySelector("dialog");
+    modal?.close();
+  };
+
   return (
-    <dialog open={visible} className="search-results">
+    <dialog onBlur={handleBlur} open={visible} className="search-results">
       <h3>Search Results</h3>
       <ul className="search-result-list">
         {searchResults?.map((result: SearchResult) => (
