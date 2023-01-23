@@ -57,7 +57,7 @@ function MapCanvas({ result }: { result: LookupResult | null }) {
 
       map.addLayer(baseVector);
     }
-  }, []);
+  }, [result]);
   return (
     <div id="map" className="map-container">
       <button className="icon-box add-to-favourite-icon">
