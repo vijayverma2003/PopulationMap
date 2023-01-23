@@ -13,7 +13,6 @@ import View from "ol/View.js";
 function MapCanvas({ result }: { result: LookupResult | null }) {
   useEffect(() => {
     if (result) {
-      console.log(result);
       let zoom = 6;
 
       if (
