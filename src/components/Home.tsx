@@ -4,7 +4,7 @@ import Header from "./Header";
 import MapDataContainer from "./MapDataContainer";
 import Sidebar from "./Sidebar";
 
-function Home() {
+function Home(): JSX.Element {
   const [favourites, setFavourites] = useState<Favourite>({});
 
   useEffect(() => {

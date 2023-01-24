@@ -23,6 +23,10 @@ export async function getLocationData(osm_ids: string) {
   return response.data;
 }
 
-export function createOSMId(data: LookupResult) {
+export function createOSMId(data: LookupResult | SearchResult) {
   return data.osm_type[0].toUpperCase() + data.osm_id;
+}
+
+export function getGeoJSONUrl(osm_id: string) {
+  return `${process.env.REACT_APP_API_URL}lookup?osm_ids=${osm_id}&format=geojson&polygon_geojson=1`;
 }

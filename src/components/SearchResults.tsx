@@ -1,6 +1,7 @@
 import { SearchResult } from "../models/nominatim";
 import queryString from "query-string";
 import React from "react";
+import { createOSMId } from "../services/location";
 
 interface SearchResultsProps {
   searchResults: SearchResult[];
@@ -11,23 +12,22 @@ function SearchResults({ searchResults, visible }: SearchResultsProps) {
   const handleSubmit = (e: React.FormEvent, result: SearchResult) => {
     e.preventDefault();
 
-    const osm_id = result.osm_type[0].toUpperCase() + result.osm_id;
-
     const q = queryString.stringify({
       q: result.display_name,
-      osm_id,
+      osm_id: createOSMId(result),
     });
 
     window.location.search = q;
   };
 
-  const handleBlur = () => {
-    const modal = document.querySelector("dialog");
-    modal?.close();
-  };
+  window.addEventListener("click", (e): void => {
+    const dialog = document.querySelector("dialog");
+    if (!(e.target instanceof HTMLDialogElement) && dialog?.open)
+      document.querySelector("dialog")?.close();
+  });
 
   return (
-    <dialog onBlur={handleBlur} open={visible} className="search-results">
+    <dialog open={visible} className="search-results">
       <h3>Search Results</h3>
       <ul className="search-result-list">
         {searchResults?.map((result: SearchResult) => (

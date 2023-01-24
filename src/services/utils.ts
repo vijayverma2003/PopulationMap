@@ -13,3 +13,11 @@ export function cleanHistory() {
   localStorage.removeItem("history");
   window.location.reload();
 }
+
+export function copyAddress() {
+  navigator.clipboard.writeText(
+    window.location.search
+      ? window.location.toString() + "&shared=true"
+      : window.location.toString() + "?shared=true"
+  );
+}

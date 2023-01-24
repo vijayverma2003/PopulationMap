@@ -5,7 +5,10 @@ interface SearchDetailsProps {
   onSubmit: (e: React.FormEvent, q: string) => void;
 }
 
-function SearchDetails({ inputDetailsRef, onSubmit }: SearchDetailsProps) {
+function SearchDetails({
+  inputDetailsRef,
+  onSubmit,
+}: SearchDetailsProps): JSX.Element {
   const [history, setHistory] = useState<string[]>([]);
 
   useEffect(() => {

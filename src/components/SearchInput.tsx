@@ -27,16 +27,14 @@ function SearchInput(): JSX.Element {
     setQuery(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent, q = query) => {
+  const handleSubmit = async (e: React.FormEvent, q = query) => {
     e.preventDefault();
 
     storeHistory(q);
 
-    setTimeout(async () => {
-      let results = await getSearchResults(q.toLowerCase());
-      setSearchResults(results);
-      setModelVisible(true);
-    }, 200);
+    let results = await getSearchResults(q.toLowerCase());
+    setSearchResults(results);
+    setModelVisible(true);
   };
 
   return (

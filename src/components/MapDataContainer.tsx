@@ -2,6 +2,7 @@ import { LookupResult } from "../models/nominatim";
 import { useEffect, useState } from "react";
 import queryString from "query-string";
 
+import { copyAddress } from "../services/utils";
 import { createOSMId, getLocationData } from "../services/location";
 import copySVG from "../images/copy.svg";
 import favouriteSVG from "../images/favourite.svg";
@@ -13,7 +14,9 @@ interface MapDataContainerProps {
   onSettingFavourites: any;
 }
 
-function MapDataContainer({ onSettingFavourites }: MapDataContainerProps) {
+function MapDataContainer({
+  onSettingFavourites,
+}: MapDataContainerProps): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [currentLocation, setCurrentLocation] = useState<LookupResult | null>(
     null
@@ -33,14 +36,6 @@ function MapDataContainer({ onSettingFavourites }: MapDataContainerProps) {
     setLoading(false);
   };
 
-  const copyAddress = () => {
-    navigator.clipboard.writeText(
-      window.location.search
-        ? window.location.toString() + "&shared=true"
-        : window.location.toString() + "?shared=true"
-    );
-  };
-
   const handleAddToFavourites = () => {
     let favourites = JSON.parse(localStorage.getItem("favourites") as string);
     const favourite = {
@@ -54,8 +49,6 @@ function MapDataContainer({ onSettingFavourites }: MapDataContainerProps) {
       localStorage.setItem("favourites", JSON.stringify(favourites));
       onSettingFavourites(favourites);
     }
-
-    // window.location.reload();
   };
 
   return (
