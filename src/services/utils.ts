@@ -8,3 +8,8 @@ export function storeHistory(query: string) {
     localStorage.setItem("history", JSON.stringify(history));
   }
 }
+
+export function cleanHistory() {
+  localStorage.removeItem("history");
+  window.location.reload();
+}

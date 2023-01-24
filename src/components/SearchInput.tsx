@@ -1,12 +1,10 @@
 import queryString from "query-string";
 import React, { useEffect, useRef, useState } from "react";
-
 import { getSearchResults } from "../services/location";
 import { SearchResult } from "../models/nominatim";
 import { storeHistory } from "../services/utils";
 import SearchDetails from "./SearchDetails";
 import SearchResults from "./SearchResults";
-
 import searchIcon from "../images/search.svg";
 
 function SearchInput(): JSX.Element {

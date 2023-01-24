@@ -1,5 +1,5 @@
-import SearchInput from "./SearchInput";
 import menuSVG from "../images/menu.svg";
+import SearchInput from "./SearchInput";
 
 function Header(): JSX.Element {
   const handleMenuClick = () => {

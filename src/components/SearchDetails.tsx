@@ -14,8 +14,6 @@ function SearchDetails({ inputDetailsRef, onSubmit }: SearchDetailsProps) {
       let history = JSON.parse(historyString);
       setHistory(history);
     }
-
-    console.log(history.length);
   }, []);
 
   return history.length > 0 ? (
