@@ -1,5 +1,7 @@
 # Population & Map
 
+![Population Map displaying boston on map and it's population!](https://github.com/vijayverma2003/PopulationMap/blob/main/src/images/app.png)
+
 Population Map is a web application that allows users to view maps and population data for any location in the world. The app is built using TypeScript, React and OpenLayers, and utilizes the Nominatim API for geocoding and reverse geocoding.
 
 ## Installation
