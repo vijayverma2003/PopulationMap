@@ -45,17 +45,21 @@ function SearchResults({
         </button>
       </div>
       <ul className="search-result-list">
-        {searchResults?.map((result: SearchResult) => (
-          <li key={result.place_id} className="search-result-list-item">
-            <button
-              className="search-result-button"
-              type="button"
-              onClick={(e) => handleSubmit(e, result)}
-            >
-              {result.display_name}
-            </button>
-          </li>
-        ))}
+        {searchResults?.length > 0 ? (
+          searchResults?.map((result: SearchResult) => (
+            <li key={result.place_id} className="search-result-list-item">
+              <button
+                className="search-result-button"
+                type="button"
+                onClick={(e) => handleSubmit(e, result)}
+              >
+                {result.display_name}
+              </button>
+            </li>
+          ))
+        ) : (
+          <li>No results found.</li>
+        )}
       </ul>
     </dialog>
   );
