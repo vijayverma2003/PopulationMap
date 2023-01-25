@@ -11,8 +11,8 @@ function Header(): JSX.Element {
     <header className="main-header">
       <SearchInput />
       <div>
-        <button onClick={handleMenuClick}>
-          <img className="burger-menu" src={menuSVG} alt="Menu" />
+        <button className="burger-menu" onClick={handleMenuClick}>
+          <img src={menuSVG} alt="Menu" />
         </button>
       </div>
     </header>
