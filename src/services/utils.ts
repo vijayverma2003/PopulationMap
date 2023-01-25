@@ -1,4 +1,6 @@
 export function storeHistory(query: string) {
+  query = query.toLowerCase();
+
   if (!localStorage.getItem("history")) {
     const history = [query];
     localStorage.setItem("history", JSON.stringify(history));

@@ -23,6 +23,13 @@ function Sidebar({ favourites, onSettingFavourites }: SidebarProps) {
     localStorage.setItem("favourites", JSON.stringify(userFavourites));
   };
 
+  const handleScreenMode = () => {
+    document.body.classList.toggle("fullscreen-mode");
+    if (document.body.classList.contains("fullscreen-mode"))
+      localStorage.setItem("fullScreenMode", "on");
+    else localStorage.setItem("fullScreenMode", "");
+  };
+
   return (
     <div className="sidebar">
       <div>
@@ -51,9 +58,14 @@ function Sidebar({ favourites, onSettingFavourites }: SidebarProps) {
         )}
       </div>
 
-      <button onClick={cleanHistory} className="btn-clean">
-        Clear Search History
-      </button>
+      <div>
+        <button onClick={handleScreenMode} className="btn">
+          Toggle Screen Mode
+        </button>
+        <button onClick={cleanHistory} className="btn-clean">
+          Clear Search History
+        </button>
+      </div>
     </div>
   );
 }

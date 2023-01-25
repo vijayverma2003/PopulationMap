@@ -66,33 +66,34 @@ function MapDataContainer({
           </button>
         </div>
 
-        <header className="map-data-header">
-          <div className="map-location">
-            <img src={markerSVG} alt="Marker" />
-            <h2>{currentLocation?.display_name}</h2>
-          </div>
-          <button onClick={copyAddress} className="icon-box">
-            <img src={copySVG} alt="" />
-          </button>
-        </header>
-
-        {currentLocation?.extratags && (
-          <div className="location-data">
-            <div>
-              <h4 className="text-primary">Population</h4>
-              <p>
-                {currentLocation?.extratags["population"] ?? "Not available"}
-              </p>
+        <div className="map-info">
+          <header className="map-data-header">
+            <div className="map-location">
+              <img src={markerSVG} alt="Marker" />
+              <h2>{currentLocation?.display_name}</h2>
             </div>
-            <div>
-              <h4 className="text-primary">Census</h4>
-              <p>
-                {currentLocation?.extratags["census:population"] ??
-                  "Not available"}
-              </p>
+            <button onClick={copyAddress} className="icon-box">
+              <img src={copySVG} alt="" />
+            </button>
+          </header>
+          {currentLocation?.extratags && (
+            <div className="location-data">
+              <div>
+                <h4 className="text-primary">Population</h4>
+                <p>
+                  {currentLocation?.extratags["population"] ?? "Not available"}
+                </p>
+              </div>
+              <div>
+                <h4 className="text-primary">Census</h4>
+                <p>
+                  {currentLocation?.extratags["census:population"] ??
+                    "Not available"}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

@@ -10,7 +10,7 @@ import searchIcon from "../images/search.svg";
 function SearchInput(): JSX.Element {
   const inputDetailsRef = useRef<HTMLDivElement>(null);
 
-  const [modalVisible, setModelVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>();
 
@@ -34,7 +34,7 @@ function SearchInput(): JSX.Element {
 
     let results = await getSearchResults(q.toLowerCase());
     setSearchResults(results);
-    setModelVisible(true);
+    setModalVisible(true);
   };
 
   return (
@@ -63,6 +63,7 @@ function SearchInput(): JSX.Element {
       <SearchResults
         searchResults={searchResults as SearchResult[]}
         visible={modalVisible}
+        setVisible={setModalVisible}
       />
     </div>
   );

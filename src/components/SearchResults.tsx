@@ -6,9 +6,14 @@ import { createOSMId } from "../services/location";
 interface SearchResultsProps {
   searchResults: SearchResult[];
   visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function SearchResults({ searchResults, visible }: SearchResultsProps) {
+function SearchResults({
+  searchResults,
+  visible,
+  setVisible,
+}: SearchResultsProps) {
   const handleSubmit = (e: React.FormEvent, result: SearchResult) => {
     e.preventDefault();
 
@@ -20,15 +25,25 @@ function SearchResults({ searchResults, visible }: SearchResultsProps) {
     window.location.search = q;
   };
 
-  window.addEventListener("click", (e): void => {
-    const dialog = document.querySelector("dialog");
-    if (!(e.target instanceof HTMLDialogElement) && dialog?.open)
-      document.querySelector("dialog")?.close();
-  });
-
   return (
     <dialog open={visible} className="search-results">
-      <h3>Search Results</h3>
+      <div className="search-results-header">
+        <h3>Search Results</h3>
+        <button onClick={() => setVisible(false)}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.46 12L19 17.54V19H17.54L12 13.46L6.46 19H5V17.54L10.54 12L5 6.46V5H6.46L12 10.54L17.54 5H19V6.46L13.46 12Z"
+              fill="#555555"
+            />
+          </svg>
+        </button>
+      </div>
       <ul className="search-result-list">
         {searchResults?.map((result: SearchResult) => (
           <li key={result.place_id} className="search-result-list-item">
