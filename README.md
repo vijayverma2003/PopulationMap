@@ -72,6 +72,7 @@ The app will be running at **http://localhost:3000/**
 
 ```console
 npx create-react-app app_name --template typescript
+```
 
 2. Install openlayers package and it's types module for displaying map.
 
