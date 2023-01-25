@@ -61,12 +61,17 @@ The app will be running at **http://localhost:3000/**
 
 6. You can also view your recent searches and clear them using **Clean History** button.
 
+7. You can also view map in different modes.
+
 
 ## Setting up the project (from scratch)
 
 *Search for Nominatim Docs and Openlayers Docs on google for documentation*
 
 1. Create a react app using `create-react-app` with typescript template.
+
+```console
+npx create-react-app app_name --template typescript
 
 2. Install openlayers package and it's types module for displaying map.
 
